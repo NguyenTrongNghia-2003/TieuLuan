@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Giaoan-link - Login & Registration Form</title>
+  <style>
+    body {
+      En-height: 100vh;
+      width: 100%;
+      background: #009579;
+    }
+
+    /*page1*/
+    .page1_class1-off {
+      display: none;
+    }
+
+    /*page2*/
+    .page2_class1 {
+      display: none;
+    }
+    .page2_id1-off {
+      display: none;
+    }
+
+    /*page3*/
+    .page3_class1 {
+      display: none;
+    }
+    .page3_id1-off {
+      display: none;
+    }
+
+    .titlereg{
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    h4 {
+      color: red;
+    }
+
+    input[type=text]:hover {
+      border-bottom: 2px solid blue;
+    }
+
+    input[type=number]:hover {
+      border-bottom: 2px solid blue;
+    }
+
+    input[type=password]:hover {
+      border-bottom: 2px solid blue;
+    }
+  </style>
+</head>
+
+<body>
+  <br><br>
+  <!--page1-->
+  <center>
+    <div class="page1_class1" id="page1_id1"
+      style="background: #fefcfc; border:2px solid blue; border-radius: 20px;width: 250px;padding-top: 10px;padding-bottom: 20px;padding-left: 20px;padding-right: 20px;">
+      <h4> ĐIỀN THÔNG TIN ĐĂNG NHẬP </h4>
+      <br>
+      <input type="text" id="username" placeholder="Tên đăng nhập" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;"/><br>
+      <br>
+      <input type="password" id="password" placeholder="Mật khẩu" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;"/>
+
+      <br><span id="errorMessage" style="color: red ; " ></span><br>
+
+      <input type="submit" value="Đăng nhập" onclick="LoginUser()" style="float: center;padding-top: 1px;padding-bottom: 1px;padding-left: 5px;padding-right: 5px;font-size: 0.9em;font-weight:bold;"/><br>
+      <br>
+      <b style="color: red;">Bạn chưa có tài khoản?</b><br><input type="button" onClick="function1()" value="Tạo mới" style="margin-top: 5px;font-weight:bold;"/>
+    </div>
+
+    <!--page2-->
+    <div class="page2_class1" id="page2_id1"
+      style="background:none; border:2px solid yellow; border-radius: 20px; width: 250px;padding-top: 10px; padding-bottom: 20px; padding-left: 20px; padding-right: 20px;">
+      <span class="titlereg">TẠO TÀI KHOẢN</span><br><br>
+      <input type="text" id="usernamee" placeholder="Tên đăng nhập" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;"/><br>
+      <br>
+      <input type="password" id="passwordd" placeholder="Mật khẩu" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size: 0.9em;width: 50%;" /><br>
+      <br>
+      <input type="text" id="email" placeholder="Địa chỉ mail" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;"/><br>
+      <br>
+      <input type="number" id="phone" placeholder="Số điện thoại" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:0.9em ;width: 50%;" /><br><br>
+
+      <input type="submit" value="Tạo Mới" onclick="AddRow()" style="float: center; padding-top: 1px; padding-bottom: 1px;padding-left: 10px; padding-right: 10px;font-size: 0.9em; font-weight:bold;" />
+      <br>
+    </div>
+
+    <!--page3-->
+    <div class="page3_class1" id="page3_id1"
+      style="background:none; border:2px solid #ffffff;border-radius: 20px;width: 250px;padding-top: 10px;padding-bottom: 20px;padding-left: 20px;padding-right: 20px;">
+      <center>
+        <h3> Tài khoảng được tạo thành công. Đăng nhập vào tài khoảng của bạn!</h3>
+        <input type="submit"  onClick="function3()" value="Đăng nhập" style="font-weight:bold;"><br>
+    </div>
+
+  </center>
+  <script>
+    function AddRow(){
+        var usernamee = document.getElementById("usernamee").value;
+        var passwordd = document.getElementById("passwordd").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        if (usernamee==""|| passwordd==""|| email==""|| phone=="") {
+          return false;
+          }else{
+          google.script.run.AddRecord(usernamee,passwordd,email,phone);
+          document.getElementById("page2_id1").className = "page2_id1-off";
+          document.getElementById("page3_id1").className = "page3_id1";
+          }
+     }
+
+     function LoginUser(){
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+          google.script.run.withSuccessHandler(function(output){
+            if(output == 'TRUE'){
+              var url1 ='https://docs.google.com/spreadsheets/d/114OmXH0zKeGSHqKmDULaVEZnD81jSgqLbwujQ-k9CHU/edit?gid=0#gid=0';
+              /*var winRef = window.open(url1);          
+              winRef ? google.script.host.close() : window.onload=function(){
+                document.getElementById('url').href = url1;
+              }*/
+              window.location.href= url1;   
+            }else if(output == 'FALSE'){
+            document.getElementById("errorMessage").innerHTML = "Username, Password Chưa đúng hoặc Chưa được phê duyệt!";     
+            }    
+          }).checkLogin(username, password);
+      }
+    
+    function function1(){
+        document.getElementById("page1_id1").className = "page1_class1-off";
+        document.getElementById("page2_id1").className = "page2_id1";
+    }
+    
+    function function3(){ 
+      document.getElementById("page3_id1").className = "page3_id1-off";
+      document.getElementById("page1_id1").className = "page1_id1"; 
+    }
+
+  </script>
+</body>
+</html>
